@@ -138,7 +138,7 @@ dmypy.json
 cython_debug/
 
 # NinadK Additions
-# Adding code to ensure that all the environment files are missed. 
+# Adding following line to ensure that all the environment files are missed. 
 **/.venv
 # ignore anything that is in the output files
 **/output
@@ -148,4 +148,5 @@ cython_debug/
 
 # don't include everything that is part of shunit2 anything that yout don't need to include
 **/shunit2-1
+# bashcov generates all the code coverage metrics locally under the /coverage folder. Ignore. 
 **/coverage
