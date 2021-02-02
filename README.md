@@ -38,6 +38,14 @@ The base development environment that one needs to install and configure locally
     [flake8](https://flake8.pycqa.org/en/latest/), [pytest](https://docs.pytest.org/en/latest/), pytest-cov
     $ pip install flake8 pytest pytest-cov
 
+    Before commit checklist for python programs
+    $ flake8 --statistics 
+        output of above should be nothing. The above code should be executed in the folder where python
+        main code resides
+    $ pytest -v --cov 
+        run from the tests folder. 
+
+
 
 
 ## Usage
