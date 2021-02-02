@@ -145,3 +145,7 @@ cython_debug/
 
 # for MAC files, ignore the DS_Store
 **/.DS_Store
+
+# don't include everything that is part of shunit2 anything that yout don't need to include
+**/shunit2-1
+**/coverage
