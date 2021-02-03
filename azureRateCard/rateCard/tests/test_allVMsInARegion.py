@@ -2,6 +2,10 @@
 # given the relative import, this file has to be executed from 
 # the parent folder with following syntax:
 # python -m tests.test_allVMsInARegion
+# or the other option is to execute it from the same tests folder using either 
+# pytest ./test_allVMsInARegion.py
+# or using following for complete code coverage
+# pytest --cov=rateCard . 
 from rateCard import allVMsInARegion as av
 import os
 
