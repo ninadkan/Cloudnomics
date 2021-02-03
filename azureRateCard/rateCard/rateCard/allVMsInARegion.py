@@ -34,7 +34,7 @@ def processJsonAndCreateCSV(inputFileName, outputFileName):
     return
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     parser = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter

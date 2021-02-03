@@ -8,6 +8,8 @@
 # pytest --cov=rateCard . 
 from rateCard import allVMsInARegion as av
 import os
+import pandas as pd
+import logging
 
 outputPath = "../output/"
 inputFileName="AllVmsIn-westeurope"
@@ -40,3 +42,28 @@ def test_unsuccessful_creation_of_csvfile():
     # ASSERT
     assert (os.path.isfile(outputfileNameComplete) == False)
     return
+
+def getDataFrameFromCSV(fullFileName):
+    # from io import StringIO
+
+    logging.info(fullFileName)
+    dfDynamic = None
+    try:
+        dfDynamic = pd.read_csv(fullFileName)
+    except Exception as e:
+        logging.error("Error reading data file. Error = {}".format(str(e)))
+        pass
+    return dfDynamic
+
+
+
+def test_functional_csv_file():
+    '''
+    Test that the file that exists is a csv file and that it can be opened
+    and read with non-zero records.
+    '''
+    test_success_creation_of_csvfile()
+    # now open the csv file and check that the length is greater than one
+    dfDynamic = getDataFrameFromCSV(fullFileName=outputfileNameComplete)
+    assert (isinstance(dfDynamic, pd.DataFrame) and (len(dfDynamic) > 1))
+
