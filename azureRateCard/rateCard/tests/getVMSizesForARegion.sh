@@ -60,6 +60,6 @@ if [ "$SUBSCRIPTION_ID" ];
         az account set --subscription "$SUBSCRIPTION_ID"
         processDownloadingVMList "$1"
     else
-        echo "Need to pass Subscription ID as first parameter"
+        echo "Need to pass Subscription ID as environment variable"
 fi
 

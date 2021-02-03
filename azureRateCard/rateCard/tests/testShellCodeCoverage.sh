@@ -1,1 +1,0 @@
-bashcov ./testAll.sh

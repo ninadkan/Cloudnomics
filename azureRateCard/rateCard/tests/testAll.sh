@@ -48,20 +48,25 @@ baseDownloadFunctionImpl(){
     fi
 }
 
-testCorrectDownLoadOfVMList(){
-    baseDownloadFunctionImpl
-}
-
 
 testIncorrectDownloadOfVMList(){
     baseDownloadFunctionImpl "passdummyVariable"
 }
 
+PREVIOUS_SUBSCRIPTION_ID=""
+
 testUnsetSubscriptionIDFromEnv(){
     # remove the SUBSCRIPTION_ID from the environment variable and then again execute the test
     # expectatio is that the test should fail
+    PREVIOUS_SUBSCRIPTION_ID=$SUBSCRIPTION_ID
     unset SUBSCRIPTION_ID
     testIncorrectDownloadOfVMList
+}
+
+# Added this last such that after successful tests, the file is moved to output folder
+testCorrectDownLoadOfVMList(){
+    export SUBSCRIPTION_ID="$PREVIOUS_SUBSCRIPTION_ID"
+    baseDownloadFunctionImpl
 }
 
 . ./shunit2

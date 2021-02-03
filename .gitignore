@@ -150,3 +150,6 @@ cython_debug/
 **/shunit2-1
 # bashcov generates all the code coverage metrics locally under the /coverage folder. Ignore. 
 **/coverage
+
+# no htmlcov - although strictly speaking this is not needed as this is already taken care of. 
+**/htmlcov
