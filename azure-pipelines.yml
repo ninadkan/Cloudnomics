@@ -28,9 +28,12 @@ steps:
 - script: |
     python -m pip install --upgrade pip
     pip install -r azureRateCard/rateCard/requirements.txt
+    mkdir azureRateCard/rateCard/output
   displayName: 'Install dependencies'
 
 - script: |
     pip install pytest pytest-azurepipelines
-    pytest
+    cd azureRateCard/rateCard/tests/
+    chmod +x testAllCodeCoverage.sh
+    pytest --cov=rateCard .
   displayName: 'pytest'
