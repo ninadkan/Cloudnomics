@@ -18,4 +18,11 @@ python3 ../rateCard/allVMsInARegion.py
 # second one should work perfectly
 python3 ../rateCard/allVMsInARegion.py "../output/AllVmsIn-westeurope.json" "../output/AllVmsIn-westeurope.csv"
 
+# Lets create the combined file
+python3 ../rateCard/getAzureVMListWithACUs.py   'westeurope' \
+                                                '../output/AllVMsIn-westeurope.csv' \
+                                                '../output/AllResourceData.json' \
+                                                '../output/AzureVMWithACUs.csv' \
+                                                '../output/CombinedVmsInWestEuropeWithACU.csv'
+
 echo "Finished"
