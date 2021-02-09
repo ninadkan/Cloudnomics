@@ -21,11 +21,6 @@ export AZURE_CLIENT_ID="9e...5e0e280"
 export AZURE_CLIENT_SECRET="BXpb...NOn"
 
 '''
-# outputFolder = '../output/'
-# inputFileName = outputFolder + 'AllResourceData.json'
-# outputFileName = outputFolder + 'AzureVMWithACUs.csv'
-# originalCSVfile = outputFolder + 'AllVMsIn-westeurope.csv'
-# finalCombinedCSVFile = outputFolder + 'CombinedVmsInWestEuropeWithACU.csv'
 
 
 def saveToFile(data, fileName):

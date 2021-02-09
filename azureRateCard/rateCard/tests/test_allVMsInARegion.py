@@ -24,6 +24,7 @@ def removeExistingFile(fileName):
         os.remove(fileName)
     return
 
+
 @pytest.mark.run(order=1)
 def test_success_creation_of_csvfile():
     # PREPARE
@@ -35,6 +36,7 @@ def test_success_creation_of_csvfile():
     # ASSERT
     assert os.path.isfile(outputfileNameComplete)
     return
+
 
 @pytest.mark.run(order=2)
 def test_unsuccessful_creation_of_csvfile():
@@ -61,6 +63,7 @@ def getDataFrameFromCSV(fullFileName):
         pass
     return dfDynamic
 
+
 @pytest.mark.run(order=3)
 def test_functional_csv_file():
     '''
@@ -71,6 +74,7 @@ def test_functional_csv_file():
     # now open the csv file and check that the length is greater than one
     dfDynamic = getDataFrameFromCSV(fullFileName=outputfileNameComplete)
     assert (isinstance(dfDynamic, pd.DataFrame) and (len(dfDynamic) > 1))
+
 
 @pytest.mark.run(order=4)
 def test_coverage_get_azureVMListWithACUs():

@@ -3,6 +3,8 @@
 rm -rf ./htmlcov
 rm -rf ./coverage
 
+source ./setenv.sh
+
 # test all scripts
 bashcov ./testAll.sh
 # test all python code
