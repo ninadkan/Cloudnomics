@@ -32,7 +32,7 @@ steps:
     echo Installing $(secureFile.secureFilePath) to the local directory...
     sudo chown root:root $(secureFile.secureFilePath)
     sudo chmod +x $(secureFile.secureFilePath)
-    source export.sh
+    source $(secureFile.secureFilePath)
 
 - task: UsePythonVersion@0
   inputs:
