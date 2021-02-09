@@ -18,7 +18,6 @@ strategy:
     #   python.version: '3.6'
     Python37:
       python.version: '3.7'
-
 steps:
 
 
@@ -38,6 +37,7 @@ steps:
     sudo apt-get install ruby-full
     sudo gem install bashcov
     pip install -r azureRateCard/rateCard/requirements.txt
+    pip install pytest pytest-azurepipelines
     mkdir azureRateCard/rateCard/output
   displayName: 'Install dependencies'
 
@@ -59,14 +59,16 @@ steps:
       echo "$CLOUDNOMICS_OUTPUT_PATH"
       echo "Setting the right subscription to work on ..."
       az account set -s "$AZURE_SUBSCRIPTION_ID"
+      
+      echo "changing the current folder ..."
+      cd azureRateCard/rateCard/tests/
+      # pytest --cov=rateCard .
+      sudo chmod +x testAllCodeCoverage.sh
+      echo "Starting run of all tests ..."
+      ./testAllCodeCoverage.sh
+  displayName: 'runAll'
 
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    cd azureRateCard/rateCard/tests/
-    # pytest --cov=rateCard .
-    chmod +x testAllCodeCoverage.sh
-    ./testAllCodeCoverage.sh
-  displayName: 'pytest'
+
 
 
