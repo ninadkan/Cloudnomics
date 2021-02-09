@@ -42,12 +42,16 @@ steps:
 - script: |
     pip install pytest pytest-azurepipelines
     cd azureRateCard/rateCard/tests/
-    chmod +x testAllCodeCoverage.sh
+    
     echo Installing $(secureFile.secureFilePath) to the local directory...
     sudo chown root:root $(secureFile.secureFilePath)
     sudo chmod +x $(secureFile.secureFilePath)
     source $(secureFile.secureFilePath)
-    pytest --cov=rateCard .
+    echo $CLOUDNOMICS_REGION
+    echo $CLOUDNOMICS_OUTPUT_PATH
+    # pytest --cov=rateCard .
+    chmod +x testAllCodeCoverage.sh
+    ./testAllCodeCoverage.sh
   displayName: 'pytest'
 
 
