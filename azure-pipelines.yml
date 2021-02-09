@@ -20,10 +20,7 @@ strategy:
       python.version: '3.7'
 
 steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+
 
 - task: DownloadSecureFile@1
   name: secureFile
@@ -36,6 +33,11 @@ steps:
     sudo chown root:root $(secureFile.secureFilePath)
     sudo chmod +x $(secureFile.secureFilePath)
     source export.sh
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(python.version)'
+  displayName: 'Use Python $(python.version)'
 
 - script: |
     python -m pip install --upgrade pip
