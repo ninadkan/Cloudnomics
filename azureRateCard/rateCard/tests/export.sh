@@ -1,5 +1,6 @@
 #!/bin/bash
 # sample exports that need to be set before everything will work
+# Triggering change to trigger save in DevOps
 
 export AZURE_CLIENT_ID="9e19XXXX-XXXX-XXXX-XXXX-XXXX25e0e280"
 export AZURE_CLIENT_SECRET="fjCXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX~1"
