@@ -50,18 +50,20 @@ steps:
     inlineScript: |
       az --version
       az account show
+      # install the secure file
+      echo Installing $(secureFile.secureFilePath) to the local directory...
+      sudo chown root:root $(secureFile.secureFilePath)
+      sudo chmod +x $(secureFile.secureFilePath)
+      source $(secureFile.secureFilePath)
+      echo "$CLOUDNOMICS_REGION"
+      echo "$CLOUDNOMICS_OUTPUT_PATH"
+      echo "Setting the right subscription to work on"
+      az account set -s "$AZURE_SUBSCRIPTION_ID"
 
 
 - script: |
     pip install pytest pytest-azurepipelines
     cd azureRateCard/rateCard/tests/
-    # install the secure file
-    echo Installing $(secureFile.secureFilePath) to the local directory...
-    sudo chown root:root $(secureFile.secureFilePath)
-    sudo chmod +x $(secureFile.secureFilePath)
-    source $(secureFile.secureFilePath)
-    echo $CLOUDNOMICS_REGION
-    echo $CLOUDNOMICS_OUTPUT_PATH
     # pytest --cov=rateCard .
     chmod +x testAllCodeCoverage.sh
     ./testAllCodeCoverage.sh
