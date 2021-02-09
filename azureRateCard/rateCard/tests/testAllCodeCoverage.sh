@@ -16,13 +16,13 @@ coverage html
 # First one should give error
 python3 ../rateCard/allVMsInARegion.py
 # second one should work perfectly
-python3 ../rateCard/allVMsInARegion.py "../output/AllVmsIn-westeurope.json" "../output/AllVmsIn-westeurope.csv"
+python3 ../rateCard/allVMsInARegion.py "$CLOUDNOMICS_OUTPUT_PATH""AllVmsIn-""$CLOUDNOMICS_REGION"".json" "$CLOUDNOMICS_OUTPUT_PATH""AllVmsIn-westeurope.csv"
 
 # Lets create the combined file
-python3 ../rateCard/getAzureVMListWithACUs.py   'westeurope' \
-                                                '../output/AllVMsIn-westeurope.csv' \
-                                                '../output/AllResourceData.json' \
-                                                '../output/AzureVMWithACUs.csv' \
-                                                '../output/CombinedVmsInWestEuropeWithACU.csv'
+python3 ../rateCard/getAzureVMListWithACUs.py   "$CLOUDNOMICS_REGION" \
+                                                "$CLOUDNOMICS_OUTPUT_PATH""AllVMsIn-""$CLOUDNOMICS_REGION"".csv" \
+                                                "$CLOUDNOMICS_OUTPUT_PATH""AllResourceData.json" \
+                                                "$CLOUDNOMICS_OUTPUT_PATH""AzureVMWithACUs.csv" \
+                                                "$CLOUDNOMICS_OUTPUT_PATH""CombinedVmsIn""$CLOUDNOMICS_REGION""WithACU.csv"
 
 echo "Finished"

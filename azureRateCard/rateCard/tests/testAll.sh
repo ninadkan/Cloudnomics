@@ -9,7 +9,7 @@ baseDownloadFunctionImpl(){
     # the key for the environment variable is SUBSCRPTION_ID
 
     # default region name
-    regionName="westeurope"
+    regionName="$CLOUDNOMICS_REGION"
 
     # parameter passed is signal as to test for non-existing region and see what it results
     if [ "$1" ];
@@ -18,12 +18,12 @@ baseDownloadFunctionImpl(){
     fi
     # export REGION_NAME="$regionName"
 
-    outputlocation="../output/"
+    outputlocation="$CLOUDNOMICS_OUTPUT_PATH"
     # export OUTPUT_LOCATION="$outputlocation"
 
     # setup the TEST - ARRANGE
     # notice that I do not pass the arguments to this command!!!
-    rm $outputlocation*.json
+    rm "$outputlocation"*.json
 
     # execute the test - ACT
     ./getVMSizesForARegion.sh $regionName

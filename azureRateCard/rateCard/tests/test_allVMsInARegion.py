@@ -12,8 +12,8 @@ import os
 import pandas as pd
 import logging
 
-outputPath = "../output/"
-inputFileName = "AllVmsIn-westeurope"
+outputPath = os.environ['CLOUDNOMICS_OUTPUT_PATH']
+inputFileName = "AllVmsIn-" + os.environ['CLOUDNOMICS_REGION']
 inputFileNameComplete = outputPath+inputFileName+".json"
 outputfileNameComplete = outputPath+inputFileName+".csv"
 
@@ -76,10 +76,15 @@ def test_coverage_get_azureVMListWithACUs():
     '''
     Test complete end-2-end happy path of the getAzureVMListWithACUs.py
     '''
-    originalCSVfile = '../output/AllVMsIn-westeurope.csv'
-    jsonOutputFileName = '../output/AllResourceData.json'
-    outputFileName = '../output/AzureVMWithACUs.csv'
-    finalCombinedCSVFile = '../output/CombinedVmsInWestEuropeWithACU.csv'
+    outputFolder = os.environ['CLOUDNOMICS_OUTPUT_PATH']
+    originalCSVfile = outputFolder + 'AllVMsIn-' +\
+        os.environ['CLOUDNOMICS_REGION'] +\
+        '.csv'
+    jsonOutputFileName = outputFolder + 'AllResourceData.json'
+    outputFileName = outputFolder + 'AzureVMWithACUs.csv'
+    finalCombinedCSVFile = outputFolder + 'CombinedVmsIn' +\
+        os.environ['CLOUDNOMICS_REGION'] +\
+        'WithACU.csv'
 
     # PREPARE
     assert (os.path.exists(originalCSVfile))
@@ -92,14 +97,13 @@ def test_coverage_get_azureVMListWithACUs():
     assert (not os.path.exists(finalCombinedCSVFile))
 
     # ACT
-    gaz.invokeAll(regionName='westeurope',
+    gaz.invokeAll(regionName=os.environ['CLOUDNOMICS_REGION'],
                   originalCSVfile=originalCSVfile,
                   jsonOutputFileName=jsonOutputFileName,
                   outputFileName=outputFileName,
                   finalCombinedCSVFile=finalCombinedCSVFile)
 
-    # ASSERT 
+    # ASSERT
     assert (os.path.exists(jsonOutputFileName))
     assert (os.path.exists(outputFileName))
     assert (os.path.exists(finalCombinedCSVFile))
-

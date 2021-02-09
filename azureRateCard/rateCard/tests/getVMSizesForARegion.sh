@@ -6,8 +6,8 @@
 # az login --tenant $tenantID
 
 # set default values
-regionName="westeurope"
-outputlocation="../output/"
+regionName="$CLOUDNOMICS_REGION"
+outputlocation="$CLOUDNOMICS_OUTPUT_PATH"
 
 processDownloadingVMList(){
     # At the time of writing this script, the accepted regions were
@@ -28,7 +28,7 @@ processDownloadingVMList(){
     # switzerlandnorth, 
     # germanywestcentral, 
     # norwayeast'
-    
+
     if [ "$1" ];
     then
         regionName="$1"
@@ -53,7 +53,7 @@ processDownloadingVMList(){
     fi
 }
 
-# first parameter passed is to set the subscription ID of the logged in 
+# SUBSCRIPTION_ID Needs to be set in the environment variable.  
 # Azure tenant. 
 if [ "$SUBSCRIPTION_ID" ];
     then
