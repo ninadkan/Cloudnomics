@@ -87,7 +87,7 @@ def test_coverage_get_azureVMListWithACUs():
         'WithACU.csv'
 
     # PREPARE
-    assert (os.path.exists(originalCSVfile))
+    assert (os.path.isfile(originalCSVfile))
     removeExistingFile(jsonOutputFileName)
     removeExistingFile(outputFileName)
     removeExistingFile(finalCombinedCSVFile)
