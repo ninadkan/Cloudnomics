@@ -35,6 +35,8 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
+    sudo apt-get install ruby-full
+    gem install bashcov
     pip install -r azureRateCard/rateCard/requirements.txt
     mkdir azureRateCard/rateCard/output
   displayName: 'Install dependencies'
@@ -42,7 +44,7 @@ steps:
 - script: |
     pip install pytest pytest-azurepipelines
     cd azureRateCard/rateCard/tests/
-    
+    # install the secure file
     echo Installing $(secureFile.secureFilePath) to the local directory...
     sudo chown root:root $(secureFile.secureFilePath)
     sudo chmod +x $(secureFile.secureFilePath)
