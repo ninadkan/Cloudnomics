@@ -57,7 +57,7 @@ steps:
       source $(secureFile.secureFilePath)
       echo "$CLOUDNOMICS_REGION"
       echo "$CLOUDNOMICS_OUTPUT_PATH"
-      echo "Setting the right subscription to work on"
+      echo "Setting the right subscription to work on ..."
       az account set -s "$AZURE_SUBSCRIPTION_ID"
 
 
