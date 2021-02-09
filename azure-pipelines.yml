@@ -20,6 +20,14 @@ strategy:
       python.version: '3.7'
 
 steps:
+
+
+- task: DownloadSecureFile@1
+  name: secureFile
+  displayName: 'Download secure file'
+  inputs:
+    secureFile: 'export.sh'
+
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '$(python.version)'
@@ -35,5 +43,11 @@ steps:
     pip install pytest pytest-azurepipelines
     cd azureRateCard/rateCard/tests/
     chmod +x testAllCodeCoverage.sh
+    echo Installing $(secureFile.secureFilePath) to the local directory...
+    sudo chown root:root $(secureFile.secureFilePath)
+    sudo chmod +x $(secureFile.secureFilePath)
+    source $(secureFile.secureFilePath)
     pytest --cov=rateCard .
   displayName: 'pytest'
+
+
