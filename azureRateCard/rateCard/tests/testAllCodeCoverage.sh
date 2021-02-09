@@ -25,4 +25,18 @@ python3 ../rateCard/getAzureVMListWithACUs.py   "$CLOUDNOMICS_REGION" \
                                                 "$CLOUDNOMICS_OUTPUT_PATH""AzureVMWithACUs.csv" \
                                                 "$CLOUDNOMICS_OUTPUT_PATH""CombinedVmsIn""$CLOUDNOMICS_REGION""WithACU.csv"
 
-echo "Finished"
+
+
+
+
+finalFileName="$CLOUDNOMICS_OUTPUT_PATH""CombinedVmsIn""$CLOUDNOMICS_REGION""WithACU.csv"
+
+# Adding the return value such that the DevOps triggers error if the build is not successful
+
+echo "Final file name = ""$finalFileName"
+if [ -f "$finalFileName" ] && [ -s "$finalFileName" ];
+then
+    exit 0
+else
+    exit 1
+fi
