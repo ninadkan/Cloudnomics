@@ -28,12 +28,6 @@ steps:
   inputs:
     secureFile: 'export.sh'
 
-- script: |
-    echo Installing $(secureFile.secureFilePath) to the local directory...
-    sudo chown root:root $(secureFile.secureFilePath)
-    sudo chmod +x $(secureFile.secureFilePath)
-    source $(secureFile.secureFilePath)
-
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '$(python.version)'
@@ -49,6 +43,10 @@ steps:
     pip install pytest pytest-azurepipelines
     cd azureRateCard/rateCard/tests/
     chmod +x testAllCodeCoverage.sh
+    echo Installing $(secureFile.secureFilePath) to the local directory...
+    sudo chown root:root $(secureFile.secureFilePath)
+    sudo chmod +x $(secureFile.secureFilePath)
+    source $(secureFile.secureFilePath)
     pytest --cov=rateCard .
   displayName: 'pytest'
 
