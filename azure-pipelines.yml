@@ -25,6 +25,18 @@ steps:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
 
+- task: DownloadSecureFile@1
+  name: secureFile
+  displayName: 'Download secure file'
+  inputs:
+    secureFile: 'export.sh'
+
+- script: |
+    echo Installing $(secureFile.secureFilePath) to the local directory...
+    sudo chown root:root $(secureFile.secureFilePath)
+    sudo chmod +x $(secureFile.secureFilePath)
+    source export.sh
+
 - script: |
     python -m pip install --upgrade pip
     pip install -r azureRateCard/rateCard/requirements.txt
@@ -37,3 +49,5 @@ steps:
     chmod +x testAllCodeCoverage.sh
     pytest --cov=rateCard .
   displayName: 'pytest'
+
+
