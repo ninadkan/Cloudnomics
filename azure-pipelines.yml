@@ -36,7 +36,7 @@ steps:
 - script: |
     python -m pip install --upgrade pip
     sudo apt-get install ruby-full
-    gem install bashcov
+    sudo gem install bashcov
     pip install -r azureRateCard/rateCard/requirements.txt
     mkdir azureRateCard/rateCard/output
   displayName: 'Install dependencies'
