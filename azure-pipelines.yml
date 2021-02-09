@@ -41,6 +41,17 @@ steps:
     mkdir azureRateCard/rateCard/output
   displayName: 'Install dependencies'
 
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Windows Azure MSDN - Visual Studio Ultimate(ba1d4485-2ac1-4c28-be39-56e5a0f0185c)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az --version
+      az account show
+
+
 - script: |
     pip install pytest pytest-azurepipelines
     cd azureRateCard/rateCard/tests/
