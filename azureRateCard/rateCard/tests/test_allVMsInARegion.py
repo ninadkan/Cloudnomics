@@ -27,6 +27,7 @@ def removeExistingFile(fileName):
 
 @pytest.mark.run(order=1)
 def test_success_creation_of_csvfile():
+    logging.info("test_success_creation_of_csvfile")
     # PREPARE
     # clear the output folder
     removeExistingFile(outputfileNameComplete)
@@ -40,6 +41,7 @@ def test_success_creation_of_csvfile():
 
 @pytest.mark.run(order=2)
 def test_unsuccessful_creation_of_csvfile():
+    logging.info("test_unsuccessful_creation_of_csvfile")
     # PREPARE
     # clear the output folder
     removeExistingFile(outputfileNameComplete)
@@ -70,6 +72,7 @@ def test_functional_csv_file():
     Test that the file that exists is a csv file and that it can be opened
     and read with non-zero records.
     '''
+    logging.info("test_functional_csv_file")
     test_success_creation_of_csvfile()
     # now open the csv file and check that the length is greater than one
     dfDynamic = getDataFrameFromCSV(fullFileName=outputfileNameComplete)
@@ -81,6 +84,7 @@ def test_coverage_get_azureVMListWithACUs():
     '''
     Test complete end-2-end happy path of the getAzureVMListWithACUs.py
     '''
+    logging.info("test_coverage_get_azureVMListWithACUs")
     outputFolder = os.environ['CLOUDNOMICS_OUTPUT_PATH']
     originalCSVfile = outputFolder + 'AllVMsIn-' +\
         os.environ['CLOUDNOMICS_REGION'] +\
@@ -92,6 +96,7 @@ def test_coverage_get_azureVMListWithACUs():
         'WithACU.csv'
 
     # PREPARE
+    logging.info(originalCSVfile)
     assert (os.path.isfile(originalCSVfile))
     removeExistingFile(jsonOutputFileName)
     removeExistingFile(outputFileName)
