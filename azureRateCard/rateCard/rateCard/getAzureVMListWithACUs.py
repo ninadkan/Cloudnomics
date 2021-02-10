@@ -57,7 +57,7 @@ def getAllResourceData(regionName, outputFileName):
           '/providers/Microsoft.Compute/skus?' +\
           'api-version=2019-04-01&$filter=location eq ' +\
           regionName
-    print(url)
+    # print(url)
     r = requests.get(url, headers=headers)
     if (r.status_code == 200):
         data = r.json()
@@ -243,7 +243,7 @@ def ifKeyExistsValue(json, key):
     return strRV, boolRV
 
 
-def processJsonAndCreateCSV(inputFileName, outputFileName):
+def processJsonAndCreateCSV(regionName, inputFileName, outputFileName):
     # ColumnNames= ['maxDataDiskCount', 'memoryInMb', 'name', 'numberOfCores',
     # 'osDiskSizeInMb', 'resourceDiskSizeInMb']
     DATA_LIST = []
@@ -368,7 +368,8 @@ def processJsonAndCreateCSV(inputFileName, outputFileName):
     # https://www.wintellect.com/sizing-azure-virtual-machines/
     dfOut['TotalACU'] =\
         dfOut['vCPUsAvailable'].apply(pd.to_numeric)*dfOut['ACUs'].apply(pd.to_numeric)
-    dfOut = dfOut[(dfOut['locationsValue'] == 'westeurope')]
+
+    dfOut = dfOut[(dfOut['locationsValue'] == regionName)]
     dfOut.to_csv(outputFileName, index=0)
     return
 
@@ -409,7 +410,8 @@ def invokeAll(regionName,
               finalCombinedCSVFile):
     getAllResourceData(regionName=regionName,
                        outputFileName=jsonOutputFileName)
-    processJsonAndCreateCSV(inputFileName=jsonOutputFileName,
+    processJsonAndCreateCSV(regionName=regionName,
+                            inputFileName=jsonOutputFileName,
                             outputFileName=outputFileName)
     joinTwoExcelFilesIntoOne(originalCSVfile,
                              outputFileName,
