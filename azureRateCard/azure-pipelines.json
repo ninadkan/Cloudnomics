@@ -1,0 +1,46 @@
+{
+  "trigger": [
+    "main"
+  ],
+  "pool": {
+    "vmImage": "macOS-latest"
+  },
+  "strategy": {
+    "matrix": {
+      "Python37": {
+        "python.version": "3.7"
+      }
+    }
+  },
+  "steps": [
+    {
+      "task": "DownloadSecureFile@1",
+      "name": "secureFile",
+      "displayName": "Download secure file",
+      "inputs": {
+        "secureFile": "export.sh"
+      }
+    },
+    {
+      "task": "UsePythonVersion@0",
+      "inputs": {
+        "versionSpec": "$(python.version)"
+      },
+      "displayName": "Use Python $(python.version)"
+    },
+    {
+      "script": "python -m pip install --upgrade pip\nsudo apt-get install ruby-full\nsudo gem install bashcov\npip install -r azureRateCard/rateCard/requirements.txt\npip install pytest pytest-azurepipelines\nmkdir azureRateCard/rateCard/output\n",
+      "displayName": "Install dependencies"
+    },
+    {
+      "task": "AzureCLI@2",
+      "inputs": {
+        "azureSubscription": "Windows Azure MSDN - Visual Studio Ultimate(ba1d4485-2ac1-4c28-be39-56e5a0f0185c)",
+        "scriptType": "bash",
+        "scriptLocation": "inlineScript",
+        "inlineScript": "az --version\naz account show\n# install the secure file\necho Installing $(secureFile.secureFilePath) to the local directory...\nsudo chown root:root $(secureFile.secureFilePath)\nsudo chmod +x $(secureFile.secureFilePath)\nsource $(secureFile.secureFilePath)\necho \"$CLOUDNOMICS_REGION\"\necho \"$CLOUDNOMICS_OUTPUT_PATH\"\necho \"Setting the right subscription to work on ...\"\naz account set -s \"$AZURE_SUBSCRIPTION_ID\"\n\necho \"changing the current folder ...\"\ncd azureRateCard/rateCard/tests/\n# pytest --cov=rateCard .\nsudo chmod +x setenv.sh\nsource ./setenv.sh\nsudo chmod +x testAllCodeCoverage.sh\necho \"Starting run of all tests ...\"\n./testAllCodeCoverage.sh\n"
+      },
+      "displayName": "runAll"
+    }
+  ]
+}
